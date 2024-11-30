@@ -17,7 +17,7 @@ switch ($aksi) {
                     <a href="index.php?p=mhs&aksi=input" class="btn btn-primary"><i class="bi bi-person-plus"></i> Tambah Mahasiswa</a>
                 </div>
                 <div class="table-responsive small">
-                    <table class="table table-bordered" id="table">
+                    <table class="table table-bordered table-striped" id="table">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -62,12 +62,14 @@ switch ($aksi) {
     case 'input':
 ?>
         <div class="row-mb-5">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-        <h1 class="h2">Input Mahasiswa</h1>
+        <div class="card-header">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
+                <h1 class="h2">Input Mahasiswa</h1>
+            </div>
         </div>
+        <div class="card-body">
             <div class="col-6 mx-auto">
-                <br>
-                
+                <br>    
                 <form action="proses_mahasiswa.php?proses=insert" method="post">
                 <div class="mb-3">
                     <label class="form-label">NIM</label>
@@ -151,7 +153,6 @@ switch ($aksi) {
                             $stmt = $db->query("SELECT * FROM prodi");
                             $prodi = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             
-                            // Membuat dropdown
                             foreach ($prodi as $data_prodi) {
                                 echo "<option value=\"" . htmlspecialchars($data_prodi['id']) . "\">" . htmlspecialchars($data_prodi['nama_prodi']) . "</option>";
                             }
@@ -174,6 +175,7 @@ switch ($aksi) {
                 </form>
             </div>
         </div>
+        </div>
 <?php
         break;
 
@@ -187,12 +189,14 @@ switch ($aksi) {
 ?>
 
 <div class="row-mb-5">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <div class="card-header">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
         <h1 class="h2">Edit Mahasiswa</h1>
         </div>
+    </div>
+    <div class="card-body">
             <div class="col-6 mx-auto">
                 <br>
-                
                 <form action="proses_mahasiswa.php?proses=edit" method="post">
                 <div class="mb-3">
                     <label class="form-label">NIM</label>
@@ -205,11 +209,11 @@ switch ($aksi) {
                 <div class="row">
                     <div class="mb-3 col-3">
                         <label class="form-label">Tgl</label>
-                        <select select class="form-select" name="tgl">
+                        <select select class="form-control" name="tgl">
                             <option selected>-Tgl-</option>
                             <?php
                                 for($i=1; $i<=31; $i++){
-                                    $selected=($tgl[2]==$i) ? 'selected':''; //ternary
+                                    $selected=($tgl[2]==$i) ? 'selected':''; 
                                     echo "<option value=".$i." $selected>".$i."</option>";
                                 }
                             ?>
@@ -217,12 +221,12 @@ switch ($aksi) {
                     </div>
                     <div class="mb-3 col-3">
                         <label class="form-label">Bln</label>
-                        <select select class="form-select" name="bln">
+                        <select select class="form-control" name="bln">
                             <option selected>-Bln-</option>
                             <?php
                                 $bulan=[1=>'Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
                                 foreach($bulan as $indexbulan => $namabulan){
-                                    $selected=($tgl[1]==$indexbulan) ? 'selected':''; //ternary
+                                    $selected=($tgl[1]==$indexbulan) ? 'selected':''; 
                                     echo "<option value=".$indexbulan." $selected>".$namabulan."</option>";
                                 }
                             ?>
@@ -230,11 +234,11 @@ switch ($aksi) {
                     </div>
                     <div class="mb-3 col-3">
                         <label class="form-label">Thn</label>
-                        <select select class="form-select" name="thn">
+                        <select select class="form-control" name="thn">
                             <option selected>-Thn-</option>
                             <?php
                                 for($i=2024; $i>=1900; $i--){
-                                    $selected=($tgl[0]==$i) ? 'selected':''; //ternary
+                                    $selected=($tgl[0]==$i) ? 'selected':''; 
                                     echo "<option value=".$i." $selected>".$i."</option>";
                                 }
                             ?>
@@ -273,15 +277,14 @@ switch ($aksi) {
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Prodi</label>
-                    <select select class="form-select" name="id_prodi">
+                    <select select class="form-control" name="id_prodi">
                         <option selected>-Pilih Prodi-</option>
                         <?php
                             $stmt = $db->query("SELECT * FROM prodi");
                             $prodi = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             
-                            // Membuat dropdown dengan menandai opsi terpilih
                             foreach ($prodi as $data_prodi) {
-                                $selected = ($data_prodi['id'] == $data_mhs['prodi_id']) ? 'selected' : ''; // ternary untuk opsi terpilih
+                                $selected = ($data_prodi['id'] == $data_mhs['prodi_id']) ? 'selected' : ''; 
                                 echo "<option value=\"" . htmlspecialchars($data_prodi['id']) . "\" $selected>" . htmlspecialchars($data_prodi['nama_prodi']) . "</option>";
                             }
                         ?>
@@ -302,7 +305,8 @@ switch ($aksi) {
                 <hr>
                 </form>
             </div>
-        </div>
+    </div>
+</div>
  <?php
         break;
 
