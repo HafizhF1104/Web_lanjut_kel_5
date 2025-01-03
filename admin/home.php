@@ -7,5 +7,6 @@
 
 <div class="card-body">
   <h1 style="font-family: Maiandra GD; font-size: 70px;"  >WELCOME TO BACKEND</h1><br>
+  <h3 style="font-family: Maiandra GD; font-size: 70px;">Project Kelompok 5</h3>
 
 </div>
